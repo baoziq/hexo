@@ -601,3 +601,30 @@ int &lref = a; // 左值引用
 int &&rref = 20;    //右值引用
 ```
 在写函数的参数时，最好将参数定义为const引用类型，首先可以保证函数内部不会对参数做出修改，而且引用不会进行拷贝操作；其次，const引用可以传入右值引用，而非const的左值引用只能传入左值。例如，当传入的参数为具体的数字的时候，此时参数为右值，如果函数参数定义为const引用，可以传入，否则会出错
+
+### move
+```c++
+int a = 20;
+int b = move(20);
+```
+b和a分别有自己的地址，a和b各存一份数据，int没有动态分配，所以只能复制，所以move对于基本类型没有实际作用
+```c++
+class vector{
+    int* data;
+    size_t size;
+    size_t capacity;
+}
+```
+这是vector的定义，所以对于下面的代码
+```c++
+vector<int> vec1 = {1, 2, 3, 4, 5};
+vector<int> vec2 = std::move(vec1);
+```
+会执行下面的操作
+```c++
+vec2.data = vec1.data;
+vec1.data = nullptr;
+vec1.size = 0;
+vec1.capacity = 0;
+```
+它会将vec1的内容“偷”过来，避免复制。
