@@ -522,7 +522,7 @@ void print(std::string_view sv) {
 
 ### 类型转换
 
-#### static_cast
+#### `static_cast`
 
 ```c++
 #include <iostream>
@@ -554,9 +554,10 @@ int main() {
 2. 指针和整数之间的转换
 3. 非相关类型的转换
 
-### 数组指针 todo，primer6.3
+### 数组指针 todo，(primer 6.3)
 数组不能被拷贝，所以在函数中无法返回数组，但是可以返回数组的指针或引用
 在写一个返回数组指针的函数时，可以用别名来声明
+
 ```c++
 typedef int arrT[10];   // 为int[10]起一个别名
 using arrT = int[10];   // 等价上面
@@ -628,3 +629,102 @@ vec1.size = 0;
 vec1.capacity = 0;
 ```
 它会将vec1的内容“偷”过来，避免复制。
+
+### 多态
+
+多态分为两种，一种是运行时多态，一种时编译时多态
+
+#### 运行时多态
+
+运行时多态就是虚函数+继承
+
+```c++
+#include <iostream>
+
+class Base {
+public:
+    virtual void foo() {cout << "base foo" << endl;}
+};
+
+class Derived : public Base {
+public:
+    void foo() {cout << "derived foo" << endl;}
+};
+
+int main() {
+    Base* p = new Derived();
+   p -> foo();
+}
+```
+
+在上面的例子中，base中foo定义为虚函数，所以在p调用foo时，实际调用的时derived中的foo
+
+```c++
+Derived* p = new Derived();
+p->derivedOnlyMethod(); // ✅ 直接访问派生类独有成员
+delete p;   
+```
+
+```c++
+Base* p = new Base();
+p->foo();  // 调用 Base::foo()
+delete p;  // 调用 Base::~Base()
+```
+
+```c++
+Base* p = new Derived();  // upcast
+p->foo();  // 如果 foo 是 virtual，调用 Derived::foo()
+delete p;  // 如果 ~Base 是 virtual，调用 Derived::~Derived() + Base::~Base()
+
+```
+
+上面这三种定义指针的方式
+
+​	第一种限制死了p的类型，只能是derived，如果后续想要更换其他派生类的话，需要该所有Derived
+
+​	第二种p只能是基类
+
+​	第三种是多态的标准写法，p的类型是Base*，所以只能通过p访问基类中的接口，但是如果Base中的接口定义为虚函数，调用时会动态绑定到Derived中的实现
+
+
+
+在c++中，析构函数可以定义为虚函数，而且当析构函数定义为虚函数之后，delete p会调用派生类中的析构函数，否则，只会调用基类中的析构函数；构造函数不能定义为虚函数，虚函数依赖虚函数表，虚表指针在构造函数中初始化的
+
+#### 编译时多态
+
+模板+函数重载
+
+函数重载
+
+```c++
+void print(int x) { std::cout << "int\n"; }
+void print(double x) { std::cout << "double\n"; }
+
+int main() {
+    print(10);   // 编译期决定调用 print(int)
+    print(3.14); // 编译期决定调用 print(double)
+}
+
+```
+
+模板
+
+```c++
+template <typename T>
+struct Base {
+    void call() {
+        static_cast<T*>(this)->impl(); // 静态多态
+    }
+};
+
+struct Derived : Base<Derived> {
+    void impl() { std::cout << "Derived\n"; }
+};
+
+int main() {
+    Derived d;
+    d.call();  // 编译期决定调用 Derived::impl()
+}
+
+```
+
