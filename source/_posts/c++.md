@@ -59,8 +59,6 @@ std::cout << *p << std::endl;
 // error: constexpr variable 'p' must be initialized by a constant expression
 ```
 
-
-
 ### static
 
 被static修饰的变量只能在当前文件访问，函数同理
@@ -96,8 +94,6 @@ int main() {
     return 0;
 }
 ```
-
-
 
 ### extern
 
@@ -289,8 +285,6 @@ bool compareStudents(const Student& a, const Student& b) {
 }
 
 ```
-
-
 
 ### 引用和指针
 
@@ -632,7 +626,7 @@ vec1.capacity = 0;
 
 ### 多态
 
-多态分为两种，一种是运行时多态，一种时编译时多态
+多态分为两种，一种是运行时多态，一种是编译时多态
 
 #### 运行时多态
 
