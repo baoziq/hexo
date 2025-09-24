@@ -340,7 +340,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-09-23 13:50:27" itemprop="dateModified" datetime="2025-09-23T13:50:27+08:00">2025-09-23</time>
+                <time title="修改时间：2025-09-23 18:02:04" itemprop="dateModified" datetime="2025-09-23T18:02:04+08:00">2025-09-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -489,6 +489,19 @@
 <td>强制显示文件名（多文件时更清晰）</td>
 </tr>
 </tbody></table>
+<h3 id="chown"><a href="#chown" class="headerlink" title="chown"></a>chown</h3><p>修改文件或目录的所有者和所属组</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chown</span> [选项] [新属主][:[新属组]] 文件...</span><br></pre></td></tr></table></figure>
+
+<p>例如</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chown</span> alice:developers myfile.txt</span><br></pre></td></tr></table></figure>
+
+<p>修改所有者为alice，组为developers</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chown</span> alice myfile.txt</span><br></pre></td></tr></table></figure>
+
+<p>修改所有者</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chown</span> :developers myfile.txt</span><br></pre></td></tr></table></figure>
+
+<p>所有者不变，只修改组</p>
 
       
     </div>
