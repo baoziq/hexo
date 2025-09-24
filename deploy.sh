@@ -3,7 +3,7 @@
 set -e
 
 echo "git pull"
-git pull
+git pull origin main
 echo "git add ."
 git add .
 commit_msg=${1:-"update: $(date '+%Y-%m-%d %H:%M:%S')"}
