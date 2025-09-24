@@ -85,3 +85,31 @@ tail /var/log/messages
 | `--pid=<PID>` | 和 `-f` 一起用，指定进程退出后自动停止跟踪                  |
 | `-q`          | 静默模式，多文件时不显示文件名                              |
 | `-v`          | 强制显示文件名（多文件时更清晰）                            |
+
+### chown
+
+修改文件或目录的所有者和所属组
+
+```bash
+chown [选项] [新属主][:[新属组]] 文件...
+```
+
+例如
+
+```bash
+chown alice:developers myfile.txt
+```
+
+修改所有者为alice，组为developers
+
+```bash
+chown alice myfile.txt
+```
+
+修改所有者
+
+```bash
+chown :developers myfile.txt
+```
+
+所有者不变，只修改组

@@ -722,3 +722,100 @@ int main() {
 
 ```
 
+### `noexcept`
+
+用于说明一个函数不会抛出异常，或者用来检测一个表达式是否可能抛异常
+
+```c++
+void foo() noexcept{}
+```
+
+```c++
+struct A {
+    A(const A&) { std::cout << "copy\n"; }
+    A(A&&) noexcept { std::cout << "move\n"; }
+};
+
+std::vector<A> v;
+v.emplace_back();
+v.push_back(A{});  // 如果移动构造是 noexcept，vector 扩容时用 move，否则可能用 copy
+
+```
+
+```c++
+noexcept(expression)
+```
+
+这是一个常量表达式，结果是true或者false，表示expression在当前上下文是否可能抛异常
+
+```c++
+#include <iostream>
+
+void might_throw();
+void never_throw() noexcept;
+
+int main() {
+    std::cout << noexcept(might_throw()) << "\n";  // 可能抛异常 => 输出 0
+    std::cout << noexcept(never_throw()) << "\n";  // 承诺不抛 => 输出 1
+}
+```
+
+### 纯虚函数
+
+纯虚函数是一种特殊的虚函数，在声明时写成=0
+
+```c++
+struct Base {
+    virtual void hello() = 0;  // 纯虚函数
+};
+```
+
+它的实现必须由派生类提供
+
+含有至少一个虚函数的类叫做抽象类，它不能直接实例化
+
+```c++
+#include <iostream>
+
+struct Base {
+    virtual void hello() = 0;  // 纯虚函数
+};
+
+struct Derived : Base {
+    void hello() override { std::cout << "Derived\n"; }
+};
+
+int main() {
+    // Base b;         // ❌ 错误：抽象类不能实例化
+    Base* b = new Derived();
+    b->hello();          // ✅ 输出 "Derived"
+}
+```
+
+### Rule of three
+
+如果类定义了析构函数、拷贝构造函数、或拷贝赋值运算符中的一个，几乎总是需要显式的定义另外两个。
+
+因为当你显式定义了其中一个的时候，意味着类涉及到一些资源管理，
+
+```c++
+#include <iostream>
+
+class MyArray {
+public:
+	MyArray(size_t n) : size(n), data(new int[n]) {}
+	~MyArray() { delete[] data; }
+private:
+	std::size_t size;
+	int* data;
+};
+
+int main() {
+	MyArray a(10);
+	MyArray b = a;
+	
+}
+```
+
+在上面这段代码中，如果不写拷贝构造和拷贝赋值的话，编译器会自动写，但是这样，a和b中的data指向的是一个地址，data会被释放两次，导致程序崩溃。
+
