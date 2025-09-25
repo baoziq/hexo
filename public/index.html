@@ -162,6 +162,211 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/09/24/shell/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="baozi">
+      <meta itemprop="description" content="The road is long, the running is continue.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="baozi's page">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/09/24/shell/" class="post-title-link" itemprop="url">shell</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2025-09-24 22:05:51" itemprop="dateCreated datePublished" datetime="2025-09-24T22:05:51+08:00">2025-09-24</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/missing-semester/" itemprop="url" rel="index"><span itemprop="name">missing-semester</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="echo"><a href="#echo" class="headerlink" title="echo"></a>echo</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo [-neE] [ARGUMENTS]</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>当-n 选项，则取消尾随换行符</p>
+</li>
+<li><p>如果-e 选项，则将解释以下反斜杠转义字符:</p>
+<ul>
+<li><p>\ 显示反斜杠字符</p>
+</li>
+<li><p>\a 警报(BEL)</p>
+</li>
+<li><p>\b 显示退格字符</p>
+</li>
+<li><p>\c 禁止任何进一步的输出</p>
+</li>
+<li><p>\e 显示转义字符</p>
+</li>
+<li><p>\f 显示窗体提要字符</p>
+</li>
+<li><p>\n 显示新行</p>
+</li>
+<li><p>\r 显示回车</p>
+</li>
+<li><p>\t 显示水平标签</p>
+</li>
+<li><p>\v 显示垂直标签</p>
+</li>
+<li><p>这个-E 项禁用转义字符的解释。这是默认值</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="dig"><a href="#dig" class="headerlink" title="dig"></a>dig</h3><p>查询域名的DNS记录，看域名解析到哪里</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dig [@dns服务器] &lt;域名&gt; [查询类型]</span><br></pre></td></tr></table></figure>
+
+<h3 id="grep"><a href="#grep" class="headerlink" title="grep"></a>grep</h3><table>
+<thead>
+<tr>
+<th>选项</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>-i</code></td>
+<td>忽略大小写</td>
+</tr>
+<tr>
+<td><code>-n</code></td>
+<td>显示匹配行的行号</td>
+</tr>
+<tr>
+<td><code>-v</code></td>
+<td>反向匹配（显示不匹配的行）</td>
+</tr>
+<tr>
+<td><code>-r</code> &#x2F; <code>-R</code></td>
+<td>递归搜索目录下所有文件</td>
+</tr>
+<tr>
+<td><code>-l</code></td>
+<td>只显示文件名，不显示匹配内容</td>
+</tr>
+<tr>
+<td><code>-c</code></td>
+<td>只显示匹配的行数</td>
+</tr>
+<tr>
+<td><code>-o</code></td>
+<td>只输出匹配的字符串，而不是整行</td>
+</tr>
+<tr>
+<td><code>-E</code></td>
+<td>使用扩展正则（等价于 <code>egrep</code>）</td>
+</tr>
+<tr>
+<td><code>-w</code></td>
+<td>只匹配整个单词，而不是部分匹配</td>
+</tr>
+<tr>
+<td><code>--color</code></td>
+<td>高亮匹配的关键字</td>
+</tr>
+</tbody></table>
+<p>例如：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep <span class="string">&quot;error&quot;</span> /var/log/nginx/error.log</span><br></pre></td></tr></table></figure>
+
+<p>这条命令会输出所有包含error的行</p>
+<h3 id="tail"><a href="#tail" class="headerlink" title="tail"></a>tail</h3><p>显示文件的最后几行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">tail</span> /var/log/messages</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>-n &lt;行数&gt;</code></td>
+<td>显示最后 N 行（默认 10 行）</td>
+</tr>
+<tr>
+<td><code>-c &lt;字节数&gt;</code></td>
+<td>显示最后 N 个字节</td>
+</tr>
+<tr>
+<td><code>-f</code></td>
+<td>持续输出文件新增内容（实时跟踪）</td>
+</tr>
+<tr>
+<td><code>-F</code></td>
+<td>类似 <code>-f</code>，但文件被重命名或替换后会重新打开（更适合看日志）</td>
+</tr>
+<tr>
+<td><code>--pid=&lt;PID&gt;</code></td>
+<td>和 <code>-f</code> 一起用，指定进程退出后自动停止跟踪</td>
+</tr>
+<tr>
+<td><code>-q</code></td>
+<td>静默模式，多文件时不显示文件名</td>
+</tr>
+<tr>
+<td><code>-v</code></td>
+<td>强制显示文件名（多文件时更清晰）</td>
+</tr>
+</tbody></table>
+<h3 id="chown"><a href="#chown" class="headerlink" title="chown"></a>chown</h3><p>修改文件或目录的所有者和所属组</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chown</span> [选项] [新属主][:[新属组]] 文件...</span><br></pre></td></tr></table></figure>
+
+<p>例如</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chown</span> alice:developers myfile.txt</span><br></pre></td></tr></table></figure>
+
+<p>修改所有者为alice，组为developers</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chown</span> alice myfile.txt</span><br></pre></td></tr></table></figure>
+
+<p>修改所有者</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chown</span> :developers myfile.txt</span><br></pre></td></tr></table></figure>
+
+<p>所有者不变，只修改组</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2025/09/24/c++/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -397,211 +602,6 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MyArray</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="built_in">MyArray</span>(<span class="type">size_t</span> n) : <span class="built_in">size</span>(n), <span class="built_in">data</span>(<span class="keyword">new</span> <span class="type">int</span>[n]) &#123;&#125;</span><br><span class="line">	~<span class="built_in">MyArray</span>() &#123; <span class="keyword">delete</span>[] data; &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	std::<span class="type">size_t</span> size;</span><br><span class="line">	<span class="type">int</span>* data;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="function">MyArray <span class="title">a</span><span class="params">(<span class="number">10</span>)</span></span>;</span><br><span class="line">	MyArray b = a;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>在上面这段代码中，如果不写拷贝构造和拷贝赋值的话，编译器会自动写，但是这样，a和b中的data指向的是一个地址，data会被释放两次，导致程序崩溃。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2025/09/24/shell/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="baozi">
-      <meta itemprop="description" content="The road is long, the running is continue.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="baozi's page">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/09/24/shell/" class="post-title-link" itemprop="url">shell</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2025-09-24 22:05:51" itemprop="dateCreated datePublished" datetime="2025-09-24T22:05:51+08:00">2025-09-24</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/missing-semester/" itemprop="url" rel="index"><span itemprop="name">missing-semester</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="echo"><a href="#echo" class="headerlink" title="echo"></a>echo</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo [-neE] [ARGUMENTS]</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>当-n 选项，则取消尾随换行符</p>
-</li>
-<li><p>如果-e 选项，则将解释以下反斜杠转义字符:</p>
-<ul>
-<li><p>\ 显示反斜杠字符</p>
-</li>
-<li><p>\a 警报(BEL)</p>
-</li>
-<li><p>\b 显示退格字符</p>
-</li>
-<li><p>\c 禁止任何进一步的输出</p>
-</li>
-<li><p>\e 显示转义字符</p>
-</li>
-<li><p>\f 显示窗体提要字符</p>
-</li>
-<li><p>\n 显示新行</p>
-</li>
-<li><p>\r 显示回车</p>
-</li>
-<li><p>\t 显示水平标签</p>
-</li>
-<li><p>\v 显示垂直标签</p>
-</li>
-<li><p>这个-E 项禁用转义字符的解释。这是默认值</p>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="dig"><a href="#dig" class="headerlink" title="dig"></a>dig</h3><p>查询域名的DNS记录，看域名解析到哪里</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dig [@dns服务器] &lt;域名&gt; [查询类型]</span><br></pre></td></tr></table></figure>
-
-<h3 id="grep"><a href="#grep" class="headerlink" title="grep"></a>grep</h3><table>
-<thead>
-<tr>
-<th>选项</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>-i</code></td>
-<td>忽略大小写</td>
-</tr>
-<tr>
-<td><code>-n</code></td>
-<td>显示匹配行的行号</td>
-</tr>
-<tr>
-<td><code>-v</code></td>
-<td>反向匹配（显示不匹配的行）</td>
-</tr>
-<tr>
-<td><code>-r</code> &#x2F; <code>-R</code></td>
-<td>递归搜索目录下所有文件</td>
-</tr>
-<tr>
-<td><code>-l</code></td>
-<td>只显示文件名，不显示匹配内容</td>
-</tr>
-<tr>
-<td><code>-c</code></td>
-<td>只显示匹配的行数</td>
-</tr>
-<tr>
-<td><code>-o</code></td>
-<td>只输出匹配的字符串，而不是整行</td>
-</tr>
-<tr>
-<td><code>-E</code></td>
-<td>使用扩展正则（等价于 <code>egrep</code>）</td>
-</tr>
-<tr>
-<td><code>-w</code></td>
-<td>只匹配整个单词，而不是部分匹配</td>
-</tr>
-<tr>
-<td><code>--color</code></td>
-<td>高亮匹配的关键字</td>
-</tr>
-</tbody></table>
-<p>例如：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep <span class="string">&quot;error&quot;</span> /var/log/nginx/error.log</span><br></pre></td></tr></table></figure>
-
-<p>这条命令会输出所有包含error的行</p>
-<h3 id="tail"><a href="#tail" class="headerlink" title="tail"></a>tail</h3><p>显示文件的最后几行</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">tail</span> /var/log/messages</span><br></pre></td></tr></table></figure>
-
-<table>
-<thead>
-<tr>
-<th>选项</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>-n &lt;行数&gt;</code></td>
-<td>显示最后 N 行（默认 10 行）</td>
-</tr>
-<tr>
-<td><code>-c &lt;字节数&gt;</code></td>
-<td>显示最后 N 个字节</td>
-</tr>
-<tr>
-<td><code>-f</code></td>
-<td>持续输出文件新增内容（实时跟踪）</td>
-</tr>
-<tr>
-<td><code>-F</code></td>
-<td>类似 <code>-f</code>，但文件被重命名或替换后会重新打开（更适合看日志）</td>
-</tr>
-<tr>
-<td><code>--pid=&lt;PID&gt;</code></td>
-<td>和 <code>-f</code> 一起用，指定进程退出后自动停止跟踪</td>
-</tr>
-<tr>
-<td><code>-q</code></td>
-<td>静默模式，多文件时不显示文件名</td>
-</tr>
-<tr>
-<td><code>-v</code></td>
-<td>强制显示文件名（多文件时更清晰）</td>
-</tr>
-</tbody></table>
-<h3 id="chown"><a href="#chown" class="headerlink" title="chown"></a>chown</h3><p>修改文件或目录的所有者和所属组</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chown</span> [选项] [新属主][:[新属组]] 文件...</span><br></pre></td></tr></table></figure>
-
-<p>例如</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chown</span> alice:developers myfile.txt</span><br></pre></td></tr></table></figure>
-
-<p>修改所有者为alice，组为developers</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chown</span> alice myfile.txt</span><br></pre></td></tr></table></figure>
-
-<p>修改所有者</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chown</span> :developers myfile.txt</span><br></pre></td></tr></table></figure>
-
-<p>所有者不变，只修改组</p>
 
       
     </div>
@@ -1063,7 +1063,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-09-24 21:29:02" itemprop="dateModified" datetime="2025-09-24T21:29:02+08:00">2025-09-24</time>
+                <time title="修改时间：2025-09-25 21:31:10" itemprop="dateModified" datetime="2025-09-25T21:31:10+08:00">2025-09-25</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1142,6 +1142,10 @@
 <h3 id="1ll"><a href="#1ll" class="headerlink" title="1ll"></a>1ll</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1ll</span> * nums[mid] * num &gt;= target</span><br></pre></td></tr></table></figure>
 
 <p>target是long long类型，nums和num都是int类型，当需要类型转换的时候，可以在<strong>前面</strong>加一个1ll，表示转换成long long类型</p>
+<h3 id="向上取整"><a href="#向上取整" class="headerlink" title="向上取整"></a>向上取整</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> a = <span class="number">7</span>;</span><br><span class="line"><span class="type">int</span> b = <span class="number">3</span>;</span><br><span class="line"><span class="type">int</span> res = (a + b - <span class="number">1</span>) / b;	<span class="comment">// res = 3</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="二分答案"><a href="#二分答案" class="headerlink" title="二分答案"></a>二分答案</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 计算满足 check(x) == true 的最小整数 x</span></span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">binarySearchMin</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 二分猜答案：判断 mid 是否满足题目要求</span></span><br><span class="line">        <span class="keyword">auto</span> check = [&amp;](<span class="type">int</span> mid) -&gt; <span class="type">bool</span> &#123;</span><br><span class="line">            </span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> left = ; <span class="comment">// 循环不变量：check(left) 恒为 false</span></span><br><span class="line">        <span class="type">int</span> right = ; <span class="comment">// 循环不变量：check(right) 恒为 true</span></span><br><span class="line">        <span class="keyword">while</span> (left + <span class="number">1</span> &lt; right) &#123; <span class="comment">// 开区间不为空</span></span><br><span class="line">            <span class="type">int</span> mid = left + (right - left) / <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span> (<span class="built_in">check</span>(mid)) &#123; <span class="comment">// 说明 check(&gt;= mid 的数) 均为 true</span></span><br><span class="line">                right = mid; <span class="comment">// 接下来在 (left, mid) 中二分答案</span></span><br><span class="line">            &#125; <span class="keyword">else</span> &#123; <span class="comment">// 说明 check(&lt;= mid 的数) 均为 false</span></span><br><span class="line">                left = mid; <span class="comment">// 接下来在 (mid, right) 中二分答案</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 循环结束后 left+1 = right</span></span><br><span class="line">        <span class="comment">// 此时 check(left) == false 而 check(left+1) == check(right) == true</span></span><br><span class="line">        <span class="comment">// 所以 right 就是最小的满足 check 的值</span></span><br><span class="line">        <span class="keyword">return</span> right;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
 
       
     </div>
