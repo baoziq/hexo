@@ -543,6 +543,89 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/09/18/Linux/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="baozi">
+      <meta itemprop="description" content="The road is long, the running is continue.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="baozi's page">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/09/18/Linux/" class="post-title-link" itemprop="url">Linux</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2025-09-18 10:02:53" itemprop="dateCreated datePublished" datetime="2025-09-18T10:02:53+08:00">2025-09-18</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="exit"><a href="#exit" class="headerlink" title="exit"></a>exit</h3><p>执行exit系统调用后，进程会从运行状态转为僵尸状态(zombie),操作系统会销毁当前进程，释放资源</p>
+<p><code>exit</code>是c标准库的函数，<code>_exit</code>是系统调用，直接终止进程，不进行清理工作</p>
+<p><code>僵尸进程</code>: 进程已经终止，但是父进程还未回收其状态信息</p>
+<h3 id="exec"><a href="#exec" class="headerlink" title="exec"></a>exec</h3><p>将当前进程的地址空间替换为新的程序，但保留当前进程的pid</p>
+<p>与<code>fork</code>配合使用，可以在子进程中运行一个新的程序</p>
+<h3 id="fork"><a href="#fork" class="headerlink" title="fork"></a>fork</h3><p>fork的作用是在当前进程下，创建一个新的进程，通常把这两个进程称为父进程和子进程，子进程的内存是复制父进程的，它们有独立的内存空间，fork在父进程中返回的值为子进程的pid，在子进程中返回的值为0,这就是为什么pid &#x3D;&#x3D; 0可以判断它是子进程</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> pid;</span><br><span class="line">pid = fork();</span><br><span class="line"><span class="keyword">if</span> (pid == <span class="number">0</span>) &#123;</span><br><span class="line">  std::cout &lt;&lt; <span class="string">&quot;this is child process&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  std::cout &lt;&lt; <span class="string">&quot;this is parent process&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>通过fork实现父子进程之间的读和写</p>
+<p> <code>read(fd[0], buf, sizeof(buf));</code></p>
+<p><code>write(fd[1], buf, sizeof(buf));</code></p>
+<p>注意：默认情况下读用0，写用1，管道是单方向的，要实现两端的读和写需要两个管道，buf是指向缓冲区的指针</p>
+<h3 id="wait"><a href="#wait" class="headerlink" title="wait"></a>wait</h3><p>用于让父进程等待子进程结束的系统调用</p>
+<h3 id="xargs"><a href="#xargs" class="headerlink" title="xargs"></a>xargs</h3><p>xargs的作用是读取标准输入，将其作为后面命令的参数</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> hello |xargs <span class="built_in">echo</span> <span class="built_in">bye</span></span><br></pre></td></tr></table></figure>
+
+<p>上述命令的输出为<code>bye hello</code></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2025/09/18/6.s081/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -613,89 +696,6 @@
 <p>使用fork和exec使得新的进程得到执行</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;kernel/types.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;kernel/stat.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;user/user.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;kernel/param.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">xargs</span><span class="params">(<span class="type">char</span>* argv[], <span class="type">char</span>* args[])</span> &#123;</span><br><span class="line">    <span class="type">int</span> fd[<span class="number">2</span>];</span><br><span class="line">    <span class="type">int</span> ret = pipe(fd);</span><br><span class="line">    <span class="keyword">if</span> (ret == <span class="number">-1</span>) &#123;</span><br><span class="line">        <span class="built_in">fprintf</span>(<span class="number">2</span>, <span class="string">&quot;pipe error&quot;</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> pid = fork();</span><br><span class="line">    <span class="keyword">if</span>(pid == <span class="number">-1</span>) &#123;</span><br><span class="line">        <span class="built_in">fprintf</span>(<span class="number">2</span>, <span class="string">&quot;fork error&quot;</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (pid == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="comment">//child</span></span><br><span class="line">        close(fd[<span class="number">0</span>]);</span><br><span class="line">        close(fd[<span class="number">1</span>]);</span><br><span class="line">        exec(argv[<span class="number">1</span>], args);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        wait(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span>* argv[])</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (argc &lt; <span class="number">3</span>) &#123;</span><br><span class="line">        <span class="built_in">fprintf</span>(<span class="number">2</span>, <span class="string">&quot;usage error&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">char</span> buf[<span class="number">512</span>];</span><br><span class="line">    <span class="type">char</span>* args[MAXARG];</span><br><span class="line">    args[<span class="number">0</span>] = argv[<span class="number">1</span>];</span><br><span class="line">    <span class="comment">// printf(&quot;argv[0]:%s\n&quot;, argv[0]);</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line">        gets(buf, <span class="number">512</span>);</span><br><span class="line">        <span class="keyword">if</span> (buf[<span class="number">0</span>] == <span class="string">&#x27;\0&#x27;</span>) &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// printf(&quot;buf:%s\n&quot;, buf);</span></span><br><span class="line"></span><br><span class="line">        buf[<span class="built_in">strlen</span>(buf) - <span class="number">1</span>] = <span class="string">&#x27;\0&#x27;</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">2</span>; i &lt; argc; i++) &#123;</span><br><span class="line">            args[i - <span class="number">1</span>] = argv[i];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        args[argc - <span class="number">1</span>] = buf;</span><br><span class="line">        args[argc] = <span class="number">0</span>;</span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">        for (int i = 0; i &lt; argc; i++) &#123;</span></span><br><span class="line"><span class="comment">            printf(&quot;args:%s\n&quot;, args[i]);</span></span><br><span class="line"><span class="comment">        &#125;</span></span><br><span class="line"><span class="comment">        */</span></span><br><span class="line">        </span><br><span class="line">        xargs(argv, args);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2025/09/18/Linux/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="baozi">
-      <meta itemprop="description" content="The road is long, the running is continue.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="baozi's page">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/09/18/Linux/" class="post-title-link" itemprop="url">Linux</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2025-09-18 10:02:53" itemprop="dateCreated datePublished" datetime="2025-09-18T10:02:53+08:00">2025-09-18</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="exit"><a href="#exit" class="headerlink" title="exit"></a>exit</h3><p>执行exit系统调用后，进程会从运行状态转为僵尸状态(zombie),操作系统会销毁当前进程，释放资源</p>
-<p><code>exit</code>是c标准库的函数，<code>_exit</code>是系统调用，直接终止进程，不进行清理工作</p>
-<p><code>僵尸进程</code>: 进程已经终止，但是父进程还未回收其状态信息</p>
-<h3 id="exec"><a href="#exec" class="headerlink" title="exec"></a>exec</h3><p>将当前进程的地址空间替换为新的程序，但保留当前进程的pid</p>
-<p>与<code>fork</code>配合使用，可以在子进程中运行一个新的程序</p>
-<h3 id="fork"><a href="#fork" class="headerlink" title="fork"></a>fork</h3><p>fork的作用是在当前进程下，创建一个新的进程，通常把这两个进程称为父进程和子进程，子进程的内存是复制父进程的，它们有独立的内存空间，fork在父进程中返回的值为子进程的pid，在子进程中返回的值为0,这就是为什么pid &#x3D;&#x3D; 0可以判断它是子进程</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> pid;</span><br><span class="line">pid = fork();</span><br><span class="line"><span class="keyword">if</span> (pid == <span class="number">0</span>) &#123;</span><br><span class="line">  std::cout &lt;&lt; <span class="string">&quot;this is child process&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  std::cout &lt;&lt; <span class="string">&quot;this is parent process&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>通过fork实现父子进程之间的读和写</p>
-<p> <code>read(fd[0], buf, sizeof(buf));</code></p>
-<p><code>write(fd[1], buf, sizeof(buf));</code></p>
-<p>注意：默认情况下读用0，写用1，管道是单方向的，要实现两端的读和写需要两个管道，buf是指向缓冲区的指针</p>
-<h3 id="wait"><a href="#wait" class="headerlink" title="wait"></a>wait</h3><p>用于让父进程等待子进程结束的系统调用</p>
-<h3 id="xargs"><a href="#xargs" class="headerlink" title="xargs"></a>xargs</h3><p>xargs的作用是读取标准输入，将其作为后面命令的参数</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> hello |xargs <span class="built_in">echo</span> <span class="built_in">bye</span></span><br></pre></td></tr></table></figure>
-
-<p>上述命令的输出为<code>bye hello</code></p>
 
       
     </div>
@@ -802,7 +802,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2025/09/18/Operating-System/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/09/18/csapp/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -816,7 +816,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2025/09/18/Operating-System/" class="post-title-link" itemprop="url">Operating System</a>
+            <a href="/2025/09/18/csapp/" class="post-title-link" itemprop="url">csapp</a>
         </h2>
 
         <div class="post-meta">
@@ -834,7 +834,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Operating-System/" itemprop="url" rel="index"><span itemprop="name">Operating System</span></a>
+                  <a href="/categories/%E8%AF%BE%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">课程</span></a>
                 </span>
             </span>
 
@@ -849,23 +849,81 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>什么是<strong>操作系统</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">操作系统是配置在计算机硬件上的第一层软件，是对硬件系统的首次扩充</span><br></pre></td></tr></table></figure>
+          <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;hello world\n&quot;</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><strong>操作系统</strong>的作用</p>
-<ol>
-<li>OS作为用户与计算机硬件系统之间的接口</li>
-<li>OS作为计算机系统资源的管理者</li>
-<li>OS实现了对计算机资源的抽象</li>
-</ol>
-<p><strong>单批道</strong>处理系统</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">解决人机矛盾和CPU与I/O设备速度不匹配矛盾，旨在提高系统资源的利用率和系统吞吐量</span><br></pre></td></tr></table></figure>
+<p>预处理阶段：预处理器根据#开头的命令，读取头文件，并插入到程序中，得到.i文件</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"># <span class="number">1</span> <span class="string">&quot;hello.c&quot;</span></span><br><span class="line"># <span class="number">1</span> <span class="string">&quot;&lt;built-in&gt;&quot;</span></span><br><span class="line"># <span class="number">1</span> <span class="string">&quot;&lt;command-line&gt;&quot;</span></span><br><span class="line"># <span class="number">31</span> <span class="string">&quot;&lt;command-line&gt;&quot;</span></span><br><span class="line"># <span class="number">1</span> <span class="string">&quot;/usr/include/stdc-predef.h&quot;</span> <span class="number">1</span> <span class="number">3</span> <span class="number">4</span></span><br><span class="line"># <span class="number">32</span> <span class="string">&quot;&lt;command-line&gt;&quot;</span> <span class="number">2</span></span><br><span class="line"># <span class="number">1</span> <span class="string">&quot;hello.c&quot;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">include &lt;stdio.h&gt;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line"> <span class="built_in">printf</span>(<span class="string">&quot;hello world\n&quot;</span>);</span><br><span class="line"> <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><strong>单批道</strong>处理系统的缺点</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">系统中的资源得不到充分的利用。内存中仅有一道程序，每当程序在运行中发出I/O请求，CPU处于等待状态</span><br></pre></td></tr></table></figure>
+<p>编译阶段：编译器将hello.i翻译成文本文件hello.s</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">	.arch armv8-a</span><br><span class="line">	.file	<span class="string">&quot;hello.c&quot;</span></span><br><span class="line">	.text</span><br><span class="line">	.section	.rodata</span><br><span class="line">	.align	<span class="number">3</span></span><br><span class="line">.LC0:</span><br><span class="line">	.<span class="built_in">string</span>	<span class="string">&quot;hello world&quot;</span></span><br><span class="line">	.text</span><br><span class="line">	.align	<span class="number">2</span></span><br><span class="line">	.global	main</span><br><span class="line">	.type	main, %function</span><br><span class="line">main:</span><br><span class="line">.LFB0:</span><br><span class="line">	.cfi_startproc</span><br><span class="line">	stp	x29, x30, [sp, <span class="number">-16</span>]!</span><br><span class="line">	.cfi_def_cfa_offset <span class="number">16</span></span><br><span class="line">	.cfi_offset <span class="number">29</span>, <span class="number">-16</span></span><br><span class="line">	.cfi_offset <span class="number">30</span>, <span class="number">-8</span></span><br><span class="line">	mov	x29, sp</span><br><span class="line">	adrp	x0, .LC0</span><br><span class="line">	add	x0, x0, :lo12:.LC0</span><br><span class="line">	bl	<span class="built_in">puts</span></span><br><span class="line">	mov	w0, <span class="number">0</span></span><br><span class="line">	ldp	x29, x30, [sp], <span class="number">16</span></span><br><span class="line">	.cfi_restore <span class="number">30</span></span><br><span class="line">	.cfi_restore <span class="number">29</span></span><br><span class="line">	.cfi_def_cfa_offset <span class="number">0</span></span><br><span class="line">	ret</span><br><span class="line">	.cfi_endproc</span><br><span class="line">.LFE0:</span><br><span class="line">	.size	main, .-main</span><br><span class="line">	.ident	<span class="string">&quot;GCC: (Ubuntu 9.4.0-1ubuntu1~20.04.2) 9.4.0&quot;</span></span><br><span class="line">	.section	.note.GNU-<span class="built_in">stack</span>,<span class="string">&quot;&quot;</span>,@progbits</span><br></pre></td></tr></table></figure>
 
-<p><strong>多批道</strong>处理系统</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">用户提交的作业先存放在外存上，排成一个队列，称为“后备队列”。然后由作业调度程序按一定的算法，从后备队列中选择若干个作业调入内存 ，使他们共享CPU和系统中的各种资源</span><br></pre></td></tr></table></figure>
+<p> 汇编阶段：汇编器将hello.s翻译成机器语言的指令，将结果保存在.o文件中</p>
+<p>链接阶段：hello.c文件中调用了printf()函数，printf函数存在于printf.o的程序中，链接器负责处理合并，得到可执行文件</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/09/18/nginx/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="baozi">
+      <meta itemprop="description" content="The road is long, the running is continue.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="baozi's page">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/09/18/nginx/" class="post-title-link" itemprop="url">nginx</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2025-09-18 10:02:53" itemprop="dateCreated datePublished" datetime="2025-09-18T10:02:53+08:00">2025-09-18</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">        <span class="attribute">listen</span> <span class="number">8080</span>;</span><br><span class="line"></span><br><span class="line">        <span class="section">location</span> /foo &#123;</span><br><span class="line">            <span class="attribute">echo</span> <span class="string">&quot;foo = [<span class="variable">$foo</span>]&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="section">location</span> /bar &#123;</span><br><span class="line">            <span class="attribute">set</span> <span class="variable">$foo</span> <span class="number">32</span>;</span><br><span class="line">            <span class="attribute">echo</span> <span class="string">&quot;foo = [<span class="variable">$foo</span>]&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">   &#125;</span><br><span class="line">$ <span class="attribute">curl</span> <span class="string">&#x27;http://localhost:8080/foo&#x27;</span></span><br><span class="line">foo = []</span><br><span class="line"></span><br><span class="line">$ curl <span class="string">&#x27;http://localhost:8080/bar&#x27;</span></span><br><span class="line">foo = [<span class="number">32</span>]</span><br><span class="line"></span><br><span class="line">$ curl <span class="string">&#x27;http://localhost:8080/foo&#x27;</span></span><br><span class="line">foo = []</span><br></pre></td></tr></table></figure>
+
+<p>Nginx 变量一旦创建，其变量名的可见范围就是整个 Nginx 配置，甚至可以跨越不同虚拟主机的 <code>server</code> 配置块，但是赋值操作在bar中实现，foo中的foo为空</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">    <span class="attribute">listen</span> <span class="number">80</span>;</span><br><span class="line">    <span class="attribute">server_name</span> www.example.com;</span><br><span class="line"></span><br><span class="line">    <span class="section">location</span> /api/ &#123;</span><br><span class="line">        <span class="attribute">proxy_pass</span> http://backend_api;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="section">location</span> /static/ &#123;</span><br><span class="line">        <span class="attribute">root</span> /var/www/html;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="section">location</span> /admin &#123;</span><br><span class="line">        <span class="attribute">return</span> <span class="number">403</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># server的作用是匹配域名和端口号，location的作用是匹配路径</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">map</span> <span class="variable">$args</span> <span class="variable">$foo</span> &#123;</span><br><span class="line">        <span class="attribute">default</span>     <span class="number">0</span>;</span><br><span class="line">        <span class="attribute">debug</span>       <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># map为映射，args为自变量，foo为因变量，第一列为args的值，第二列卫foo对应的值，default类似于switch case中的default，当其他条件都不满足时，foo为0</span></span><br><span class="line"><span class="comment"># 注意： map不能在server中，与server是并列关系</span></span><br><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">        <span class="attribute">listen</span> <span class="number">8080</span>;</span><br><span class="line"></span><br><span class="line">        <span class="section">location</span> /test &#123;</span><br><span class="line">            <span class="attribute">set</span> <span class="variable">$orig_foo</span> <span class="variable">$foo</span>;</span><br><span class="line">            <span class="attribute">set</span> <span class="variable">$args</span> <span class="literal">debug</span>;</span><br><span class="line"></span><br><span class="line">            <span class="attribute">echo</span> <span class="string">&quot;original foo: <span class="variable">$orig_foo</span>&quot;</span>;</span><br><span class="line">            <span class="attribute">echo</span> <span class="string">&quot;foo: <span class="variable">$foo</span>&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># $ curl &#x27;http://localhost:8080/test&#x27;</span></span><br><span class="line"><span class="comment">#   original foo: 0</span></span><br><span class="line"><span class="comment">#   foo: 0</span></span><br><span class="line"><span class="comment"># 原因：$foo 变量在第一次读取时，根据映射规则计算出的值被缓存住了</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># nginx有11个阶段 postread -&gt; server_rewrite -&gt; find_config -&gt; rewrite -&gt; post_rewrite -&gt; preaccess -&gt; access -&gt; postaccess -&gt; precontent -&gt; content -&gt; log</span></span><br><span class="line"><span class="section">location</span> /test &#123;</span><br><span class="line">  <span class="attribute">set</span> <span class="variable">$a</span> <span class="number">32</span>;</span><br><span class="line">  <span class="attribute">echo</span> <span class="variable">$a</span>;</span><br><span class="line">  <span class="attribute">set</span> <span class="variable">$a</span> <span class="number">50</span>;</span><br><span class="line">  <span class="attribute">echo</span> <span class="variable">$a</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># 输出结果为 50 50 </span></span><br><span class="line"><span class="comment"># set输入rewrite；echo属于content，所有set都在echo之前执行</span></span><br></pre></td></tr></table></figure>
 
 
       
@@ -968,7 +1026,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2025/09/18/csapp/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/09/18/shell/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -982,7 +1040,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2025/09/18/csapp/" class="post-title-link" itemprop="url">csapp</a>
+            <a href="/2025/09/18/shell/" class="post-title-link" itemprop="url">shell</a>
         </h2>
 
         <div class="post-meta">
@@ -994,13 +1052,20 @@
 
               <time title="创建时间：2025-09-18 10:02:53" itemprop="dateCreated datePublished" datetime="2025-09-18T10:02:53+08:00">2025-09-18</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2025-09-23 18:02:04" itemprop="dateModified" datetime="2025-09-23T18:02:04+08:00">2025-09-23</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AF%BE%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">课程</span></a>
+                  <a href="/categories/missing-semester/" itemprop="url" rel="index"><span itemprop="name">missing-semester</span></a>
                 </span>
             </span>
 
@@ -1015,16 +1080,145 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;hello world\n&quot;</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <h3 id="echo"><a href="#echo" class="headerlink" title="echo"></a>echo</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo [-neE] [ARGUMENTS]</span><br></pre></td></tr></table></figure>
 
-<p>预处理阶段：预处理器根据#开头的命令，读取头文件，并插入到程序中，得到.i文件</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"># <span class="number">1</span> <span class="string">&quot;hello.c&quot;</span></span><br><span class="line"># <span class="number">1</span> <span class="string">&quot;&lt;built-in&gt;&quot;</span></span><br><span class="line"># <span class="number">1</span> <span class="string">&quot;&lt;command-line&gt;&quot;</span></span><br><span class="line"># <span class="number">31</span> <span class="string">&quot;&lt;command-line&gt;&quot;</span></span><br><span class="line"># <span class="number">1</span> <span class="string">&quot;/usr/include/stdc-predef.h&quot;</span> <span class="number">1</span> <span class="number">3</span> <span class="number">4</span></span><br><span class="line"># <span class="number">32</span> <span class="string">&quot;&lt;command-line&gt;&quot;</span> <span class="number">2</span></span><br><span class="line"># <span class="number">1</span> <span class="string">&quot;hello.c&quot;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">include &lt;stdio.h&gt;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line"> <span class="built_in">printf</span>(<span class="string">&quot;hello world\n&quot;</span>);</span><br><span class="line"> <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>当-n 选项，则取消尾随换行符</p>
+</li>
+<li><p>如果-e 选项，则将解释以下反斜杠转义字符:</p>
+<ul>
+<li><p>\ 显示反斜杠字符</p>
+</li>
+<li><p>\a 警报(BEL)</p>
+</li>
+<li><p>\b 显示退格字符</p>
+</li>
+<li><p>\c 禁止任何进一步的输出</p>
+</li>
+<li><p>\e 显示转义字符</p>
+</li>
+<li><p>\f 显示窗体提要字符</p>
+</li>
+<li><p>\n 显示新行</p>
+</li>
+<li><p>\r 显示回车</p>
+</li>
+<li><p>\t 显示水平标签</p>
+</li>
+<li><p>\v 显示垂直标签</p>
+</li>
+<li><p>这个-E 项禁用转义字符的解释。这是默认值</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="dig"><a href="#dig" class="headerlink" title="dig"></a>dig</h3><p>查询域名的DNS记录，看域名解析到哪里</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dig [@dns服务器] &lt;域名&gt; [查询类型]</span><br></pre></td></tr></table></figure>
 
-<p>编译阶段：编译器将hello.i翻译成文本文件hello.s</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">	.arch armv8-a</span><br><span class="line">	.file	<span class="string">&quot;hello.c&quot;</span></span><br><span class="line">	.text</span><br><span class="line">	.section	.rodata</span><br><span class="line">	.align	<span class="number">3</span></span><br><span class="line">.LC0:</span><br><span class="line">	.<span class="built_in">string</span>	<span class="string">&quot;hello world&quot;</span></span><br><span class="line">	.text</span><br><span class="line">	.align	<span class="number">2</span></span><br><span class="line">	.global	main</span><br><span class="line">	.type	main, %function</span><br><span class="line">main:</span><br><span class="line">.LFB0:</span><br><span class="line">	.cfi_startproc</span><br><span class="line">	stp	x29, x30, [sp, <span class="number">-16</span>]!</span><br><span class="line">	.cfi_def_cfa_offset <span class="number">16</span></span><br><span class="line">	.cfi_offset <span class="number">29</span>, <span class="number">-16</span></span><br><span class="line">	.cfi_offset <span class="number">30</span>, <span class="number">-8</span></span><br><span class="line">	mov	x29, sp</span><br><span class="line">	adrp	x0, .LC0</span><br><span class="line">	add	x0, x0, :lo12:.LC0</span><br><span class="line">	bl	<span class="built_in">puts</span></span><br><span class="line">	mov	w0, <span class="number">0</span></span><br><span class="line">	ldp	x29, x30, [sp], <span class="number">16</span></span><br><span class="line">	.cfi_restore <span class="number">30</span></span><br><span class="line">	.cfi_restore <span class="number">29</span></span><br><span class="line">	.cfi_def_cfa_offset <span class="number">0</span></span><br><span class="line">	ret</span><br><span class="line">	.cfi_endproc</span><br><span class="line">.LFE0:</span><br><span class="line">	.size	main, .-main</span><br><span class="line">	.ident	<span class="string">&quot;GCC: (Ubuntu 9.4.0-1ubuntu1~20.04.2) 9.4.0&quot;</span></span><br><span class="line">	.section	.note.GNU-<span class="built_in">stack</span>,<span class="string">&quot;&quot;</span>,@progbits</span><br></pre></td></tr></table></figure>
+<h3 id="grep"><a href="#grep" class="headerlink" title="grep"></a>grep</h3><table>
+<thead>
+<tr>
+<th>选项</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>-i</code></td>
+<td>忽略大小写</td>
+</tr>
+<tr>
+<td><code>-n</code></td>
+<td>显示匹配行的行号</td>
+</tr>
+<tr>
+<td><code>-v</code></td>
+<td>反向匹配（显示不匹配的行）</td>
+</tr>
+<tr>
+<td><code>-r</code> &#x2F; <code>-R</code></td>
+<td>递归搜索目录下所有文件</td>
+</tr>
+<tr>
+<td><code>-l</code></td>
+<td>只显示文件名，不显示匹配内容</td>
+</tr>
+<tr>
+<td><code>-c</code></td>
+<td>只显示匹配的行数</td>
+</tr>
+<tr>
+<td><code>-o</code></td>
+<td>只输出匹配的字符串，而不是整行</td>
+</tr>
+<tr>
+<td><code>-E</code></td>
+<td>使用扩展正则（等价于 <code>egrep</code>）</td>
+</tr>
+<tr>
+<td><code>-w</code></td>
+<td>只匹配整个单词，而不是部分匹配</td>
+</tr>
+<tr>
+<td><code>--color</code></td>
+<td>高亮匹配的关键字</td>
+</tr>
+</tbody></table>
+<p>例如：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep <span class="string">&quot;error&quot;</span> /var/log/nginx/error.log</span><br></pre></td></tr></table></figure>
 
-<p> 汇编阶段：汇编器将hello.s翻译成机器语言的指令，将结果保存在.o文件中</p>
-<p>链接阶段：hello.c文件中调用了printf()函数，printf函数存在于printf.o的程序中，链接器负责处理合并，得到可执行文件</p>
+<p>这条命令会输出所有包含error的行</p>
+<h3 id="tail"><a href="#tail" class="headerlink" title="tail"></a>tail</h3><p>显示文件的最后几行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">tail</span> /var/log/messages</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>-n &lt;行数&gt;</code></td>
+<td>显示最后 N 行（默认 10 行）</td>
+</tr>
+<tr>
+<td><code>-c &lt;字节数&gt;</code></td>
+<td>显示最后 N 个字节</td>
+</tr>
+<tr>
+<td><code>-f</code></td>
+<td>持续输出文件新增内容（实时跟踪）</td>
+</tr>
+<tr>
+<td><code>-F</code></td>
+<td>类似 <code>-f</code>，但文件被重命名或替换后会重新打开（更适合看日志）</td>
+</tr>
+<tr>
+<td><code>--pid=&lt;PID&gt;</code></td>
+<td>和 <code>-f</code> 一起用，指定进程退出后自动停止跟踪</td>
+</tr>
+<tr>
+<td><code>-q</code></td>
+<td>静默模式，多文件时不显示文件名</td>
+</tr>
+<tr>
+<td><code>-v</code></td>
+<td>强制显示文件名（多文件时更清晰）</td>
+</tr>
+</tbody></table>
+<h3 id="chown"><a href="#chown" class="headerlink" title="chown"></a>chown</h3><p>修改文件或目录的所有者和所属组</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chown</span> [选项] [新属主][:[新属组]] 文件...</span><br></pre></td></tr></table></figure>
+
+<p>例如</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chown</span> alice:developers myfile.txt</span><br></pre></td></tr></table></figure>
+
+<p>修改所有者为alice，组为developers</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chown</span> alice myfile.txt</span><br></pre></td></tr></table></figure>
+
+<p>修改所有者</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chown</span> :developers myfile.txt</span><br></pre></td></tr></table></figure>
+
+<p>所有者不变，只修改组</p>
 
       
     </div>
@@ -1044,7 +1238,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2025/09/18/git%E4%BD%BF%E7%94%A8/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/09/18/python/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1058,7 +1252,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2025/09/18/git%E4%BD%BF%E7%94%A8/" class="post-title-link" itemprop="url">git使用</a>
+            <a href="/2025/09/18/python/" class="post-title-link" itemprop="url">Python中的文件操作</a>
         </h2>
 
         <div class="post-meta">
@@ -1076,7 +1270,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/git/" itemprop="url" rel="index"><span itemprop="name">git</span></a>
+                  <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
                 </span>
             </span>
 
@@ -1091,92 +1285,87 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="查看当前分支"><a href="#查看当前分支" class="headerlink" title="查看当前分支"></a>查看当前分支</h3><p><code>git branch -- show-current</code></p>
-<h3 id="回退到上一个版本"><a href="#回退到上一个版本" class="headerlink" title="回退到上一个版本"></a>回退到上一个版本</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard HEAD~1</span><br></pre></td></tr></table></figure>
+          <h1 id="打开文件"><a href="#打开文件" class="headerlink" title="打开文件"></a>打开文件</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;file_name&#x27;</span>,<span class="string">&#x27;r&#x27;</span>,encoding = <span class="string">&#x27;utf-8&#x27;</span>) <span class="keyword">as</span> f:</span><br></pre></td></tr></table></figure>
 
-<h3 id="删除文件"><a href="#删除文件" class="headerlink" title="删除文件"></a>删除文件</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git rm filename</span><br></pre></td></tr></table></figure>
+<p>with的作用相当于调用close(),文件会自动关闭</p>
+<h1 id="读写文件模式"><a href="#读写文件模式" class="headerlink" title="读写文件模式"></a>读写文件模式</h1><table>
+<thead>
+<tr>
+<th align="left">模式</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">t</td>
+<td align="left">文本模式 (默认)。</td>
+</tr>
+<tr>
+<td align="left">x</td>
+<td align="left">写模式，新建一个文件，如果该文件已存在则会报错。</td>
+</tr>
+<tr>
+<td align="left">b</td>
+<td align="left">二进制模式。</td>
+</tr>
+<tr>
+<td align="left">+</td>
+<td align="left">打开一个文件进行更新(可读可写)。</td>
+</tr>
+<tr>
+<td align="left">U</td>
+<td align="left">通用换行模式（不推荐）。</td>
+</tr>
+<tr>
+<td align="left">r</td>
+<td align="left">以只读方式打开文件。文件的指针将会放在文件的开头。这是默认模式。</td>
+</tr>
+<tr>
+<td align="left">rb</td>
+<td align="left">以二进制格式打开一个文件用于只读。文件指针将会放在文件的开头。这是默认模式。一般用于非文本文件如图片等。</td>
+</tr>
+<tr>
+<td align="left">r+</td>
+<td align="left">打开一个文件用于读写。文件指针将会放在文件的开头。</td>
+</tr>
+<tr>
+<td align="left">rb+</td>
+<td align="left">以二进制格式打开一个文件用于读写。文件指针将会放在文件的开头。一般用于非文本文件如图片等。</td>
+</tr>
+<tr>
+<td align="left">w</td>
+<td align="left">打开一个文件只用于写入。如果该文件已存在则打开文件，并从开头开始编辑，即原有内容会被删除。如果该文件不存在，创建新文件。</td>
+</tr>
+<tr>
+<td align="left">wb</td>
+<td align="left">以二进制格式打开一个文件只用于写入。如果该文件已存在则打开文件，并从开头开始编辑，即原有内容会被删除。如果该文件不存在，创建新文件。一般用于非文本文件如图片等。</td>
+</tr>
+<tr>
+<td align="left">w+</td>
+<td align="left">打开一个文件用于读写。如果该文件已存在则打开文件，并从开头开始编辑，即原有内容会被删除。如果该文件不存在，创建新文件。</td>
+</tr>
+<tr>
+<td align="left">wb+</td>
+<td align="left">以二进制格式打开一个文件用于读写。如果该文件已存在则打开文件，并从开头开始编辑，即原有内容会被删除。如果该文件不存在，创建新文件。一般用于非文本文件如图片等。</td>
+</tr>
+<tr>
+<td align="left">a</td>
+<td align="left">打开一个文件用于追加。如果该文件已存在，文件指针将会放在文件的结尾。也就是说，新的内容将会被写入到已有内容之后。如果该文件不存在，创建新文件进行写入。</td>
+</tr>
+<tr>
+<td align="left">ab</td>
+<td align="left">以二进制格式打开一个文件用于追加。如果该文件已存在，文件指针将会放在文件的结尾。也就是说，新的内容将会被写入到已有内容之后。如果该文件不存在，创建新文件进行写入。</td>
+</tr>
+<tr>
+<td align="left">a+</td>
+<td align="left">打开一个文件用于读写。如果该文件已存在，文件指针将会放在文件的结尾。文件打开时会是追加模式。如果该文件不存在，创建新文件用于读写。</td>
+</tr>
+<tr>
+<td align="left">ab+</td>
+<td align="left">以二进制格式打开一个文件用于追加。如果该文件已存在，文件指针将会放在文件的结尾。如果该文件不存在，创建新文件用于</td>
+</tr>
+</tbody></table>
+<h1 id="常用的文件操作方式"><a href="#常用的文件操作方式" class="headerlink" title="常用的文件操作方式"></a>常用的文件操作方式</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(f.readline()) <span class="comment">#打印第一行</span></span><br><span class="line"><span class="built_in">print</span>(f.readline(<span class="number">6</span>)) <span class="comment">#打印前六个字符</span></span><br><span class="line"><span class="built_in">print</span>(f.readlines()) <span class="comment">#读取所有内容，按行返回list</span></span><br><span class="line"><span class="built_in">print</span>(f.tell()) <span class="comment">#打印当前指针位置</span></span><br><span class="line"><span class="built_in">print</span>(f.read()) <span class="comment">#读取文件所有内容</span></span><br><span class="line"><span class="built_in">print</span>(f.encoding) <span class="comment">#打印当前使用的字符编码</span></span><br><span class="line"><span class="built_in">print</span>(f.name) <span class="comment">#打印文件名</span></span><br><span class="line"><span class="built_in">print</span>(f.flush()) <span class="comment">#刷新</span></span><br><span class="line">f.truncate() <span class="comment">#清空文件</span></span><br><span class="line">f.close() <span class="comment">#关闭文件</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="删除分支"><a href="#删除分支" class="headerlink" title="删除分支"></a>删除分支</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -d branch_name</span><br></pre></td></tr></table></figure>
-
-<h3 id="创建新分支"><a href="#创建新分支" class="headerlink" title="创建新分支"></a>创建新分支</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b branch_name</span><br><span class="line">git switch -c branch_name</span><br></pre></td></tr></table></figure>
-
-<h3 id="回退到clone后的版本"><a href="#回退到clone后的版本" class="headerlink" title="回退到clone后的版本"></a>回退到clone后的版本</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git restore .</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2025/09/18/lua/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="baozi">
-      <meta itemprop="description" content="The road is long, the running is continue.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="baozi's page">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/09/18/lua/" class="post-title-link" itemprop="url">lua的使用</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2025-09-18 10:02:53" itemprop="dateCreated datePublished" datetime="2025-09-18T10:02:53+08:00">2025-09-18</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&quot;2&quot;</span> + <span class="number">8</span>)</span><br><span class="line"><span class="comment">-- 输出结果为10， 类型为number，lua中只有number这一种数字类型</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 字符串连接</span></span><br><span class="line">str = <span class="number">123</span> .. <span class="number">456</span></span><br><span class="line"><span class="comment">-- 输出结果为123456，类型为string</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 获取字符串长度</span></span><br><span class="line">str = <span class="string">&quot;this is a test.&quot;</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(str))</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> x = <span class="number">10</span>	<span class="comment">-- 局部变量</span></span><br><span class="line">x = <span class="number">10</span> <span class="comment">-- 全局变量</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- lua中的函数可以当作变量</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">factorial1</span><span class="params">(n)</span></span> </span><br><span class="line">  <span class="keyword">if</span> n == <span class="number">0</span> <span class="keyword">then</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">  <span class="keyword">else</span> </span><br><span class="line">    <span class="keyword">return</span> n * factorial1(n - <span class="number">1</span>)</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="built_in">print</span>(factorial1(<span class="number">10</span>))</span><br><span class="line">factorial2 = factorial1;</span><br><span class="line"><span class="built_in">print</span>(factorial2(<span class="number">10</span>))</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- if ip is true return ip, if ip is nil return &quot;unknow&quot;</span></span><br><span class="line"><span class="keyword">return</span> ip <span class="keyword">or</span> unknow</span><br></pre></td></tr></table></figure>
-
-<h3 id="lua的八种数据类型"><a href="#lua的八种数据类型" class="headerlink" title="lua的八种数据类型"></a><code>lua</code>的八种数据类型</h3><p><code>nil</code>：空类型<br><code>boolean</code><br><code>number</code>:整数和浮点数都用number表示<br><code>string</code>：可以有三种表示方式</p>
-<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">str1 = <span class="string">&#x27;this is test1&#x27;</span></span><br><span class="line">str2 = <span class="string">&quot;this ia test2&quot;</span></span><br><span class="line"><span class="comment">-- 第三种方式可以换行</span></span><br><span class="line">str3 = <span class="string">[[</span></span><br><span class="line"><span class="string">    this</span></span><br><span class="line"><span class="string">    is</span></span><br><span class="line"><span class="string">    test3</span></span><br><span class="line"><span class="string">]]</span></span><br></pre></td></tr></table></figure>
-<p><code>function</code>：function表示lua中的函数，可以接受多个参数，也可以用<code>...</code>表示可变数目的参数，function可以返回多个参数<br><code>userdata</code>：用户自定义数据<br><code>thread</code> – todo<br><code>table</code> 相当于数组，下标从1开始，里面的元素可以是各种类型的，函数也可以作为元素</p>
-<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">tb = &#123; </span><br><span class="line">        <span class="function"><span class="keyword">function</span><span class="params">()</span></span> <span class="keyword">return</span> <span class="string">&#x27;123&#x27;</span> <span class="keyword">end</span>,</span><br><span class="line">        fucntion() <span class="built_in">print</span>(<span class="string">&quot;abc) end,</span></span><br><span class="line"><span class="string">        function(a, b) return a + b end,</span></span><br><span class="line"><span class="string">    &#125;</span></span><br></pre></td></tr></table></figure>
-<p>table还可以当作哈希表</p>
-<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">tb = &#123;</span><br><span class="line">    apple = <span class="number">3</span>,</span><br><span class="line">    banana = <span class="number">4</span>,</span><br><span class="line">    [<span class="string">&quot;tt&quot;</span>] = <span class="number">5</span>,</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">print</span>(tb[<span class="string">&quot;apple&quot;</span>])</span><br><span class="line"><span class="built_in">print</span>(tb.banana)</span><br><span class="line"><span class="built_in">print</span>(tb.[<span class="string">&quot;tt&quot;</span>])</span><br></pre></td></tr></table></figure>
 
       
     </div>

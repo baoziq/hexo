@@ -1,6 +1,6 @@
 ---
 author: baozi
-title: vim的使用方法
+title: vim
 categories: vim
 ---
 
