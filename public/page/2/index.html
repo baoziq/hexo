@@ -162,6 +162,372 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/09/18/python/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="baozi">
+      <meta itemprop="description" content="The road is long, the running is continue.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="baozi's page">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/09/18/python/" class="post-title-link" itemprop="url">Python</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2025-09-18 10:02:53" itemprop="dateCreated datePublished" datetime="2025-09-18T10:02:53+08:00">2025-09-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2025-09-28 16:03:59" itemprop="dateModified" datetime="2025-09-28T16:03:59+08:00">2025-09-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="打开文件"><a href="#打开文件" class="headerlink" title="打开文件"></a>打开文件</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;file_name&#x27;</span>,<span class="string">&#x27;r&#x27;</span>,encoding = <span class="string">&#x27;utf-8&#x27;</span>) <span class="keyword">as</span> f:</span><br></pre></td></tr></table></figure>
+
+<p>with的作用相当于调用close(),文件会自动关闭</p>
+<h1 id="读写文件模式"><a href="#读写文件模式" class="headerlink" title="读写文件模式"></a>读写文件模式</h1><table>
+<thead>
+<tr>
+<th align="left">模式</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">t</td>
+<td align="left">文本模式 (默认)。</td>
+</tr>
+<tr>
+<td align="left">x</td>
+<td align="left">写模式，新建一个文件，如果该文件已存在则会报错。</td>
+</tr>
+<tr>
+<td align="left">b</td>
+<td align="left">二进制模式。</td>
+</tr>
+<tr>
+<td align="left">+</td>
+<td align="left">打开一个文件进行更新(可读可写)。</td>
+</tr>
+<tr>
+<td align="left">U</td>
+<td align="left">通用换行模式（不推荐）。</td>
+</tr>
+<tr>
+<td align="left">r</td>
+<td align="left">以只读方式打开文件。文件的指针将会放在文件的开头。这是默认模式。</td>
+</tr>
+<tr>
+<td align="left">rb</td>
+<td align="left">以二进制格式打开一个文件用于只读。文件指针将会放在文件的开头。这是默认模式。一般用于非文本文件如图片等。</td>
+</tr>
+<tr>
+<td align="left">r+</td>
+<td align="left">打开一个文件用于读写。文件指针将会放在文件的开头。</td>
+</tr>
+<tr>
+<td align="left">rb+</td>
+<td align="left">以二进制格式打开一个文件用于读写。文件指针将会放在文件的开头。一般用于非文本文件如图片等。</td>
+</tr>
+<tr>
+<td align="left">w</td>
+<td align="left">打开一个文件只用于写入。如果该文件已存在则打开文件，并从开头开始编辑，即原有内容会被删除。如果该文件不存在，创建新文件。</td>
+</tr>
+<tr>
+<td align="left">wb</td>
+<td align="left">以二进制格式打开一个文件只用于写入。如果该文件已存在则打开文件，并从开头开始编辑，即原有内容会被删除。如果该文件不存在，创建新文件。一般用于非文本文件如图片等。</td>
+</tr>
+<tr>
+<td align="left">w+</td>
+<td align="left">打开一个文件用于读写。如果该文件已存在则打开文件，并从开头开始编辑，即原有内容会被删除。如果该文件不存在，创建新文件。</td>
+</tr>
+<tr>
+<td align="left">wb+</td>
+<td align="left">以二进制格式打开一个文件用于读写。如果该文件已存在则打开文件，并从开头开始编辑，即原有内容会被删除。如果该文件不存在，创建新文件。一般用于非文本文件如图片等。</td>
+</tr>
+<tr>
+<td align="left">a</td>
+<td align="left">打开一个文件用于追加。如果该文件已存在，文件指针将会放在文件的结尾。也就是说，新的内容将会被写入到已有内容之后。如果该文件不存在，创建新文件进行写入。</td>
+</tr>
+<tr>
+<td align="left">ab</td>
+<td align="left">以二进制格式打开一个文件用于追加。如果该文件已存在，文件指针将会放在文件的结尾。也就是说，新的内容将会被写入到已有内容之后。如果该文件不存在，创建新文件进行写入。</td>
+</tr>
+<tr>
+<td align="left">a+</td>
+<td align="left">打开一个文件用于读写。如果该文件已存在，文件指针将会放在文件的结尾。文件打开时会是追加模式。如果该文件不存在，创建新文件用于读写。</td>
+</tr>
+<tr>
+<td align="left">ab+</td>
+<td align="left">以二进制格式打开一个文件用于追加。如果该文件已存在，文件指针将会放在文件的结尾。如果该文件不存在，创建新文件用于</td>
+</tr>
+</tbody></table>
+<h1 id="常用的文件操作方式"><a href="#常用的文件操作方式" class="headerlink" title="常用的文件操作方式"></a>常用的文件操作方式</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(f.readline()) <span class="comment">#打印第一行</span></span><br><span class="line"><span class="built_in">print</span>(f.readline(<span class="number">6</span>)) <span class="comment">#打印前六个字符</span></span><br><span class="line"><span class="built_in">print</span>(f.readlines()) <span class="comment">#读取所有内容，按行返回list</span></span><br><span class="line"><span class="built_in">print</span>(f.tell()) <span class="comment">#打印当前指针位置</span></span><br><span class="line"><span class="built_in">print</span>(f.read()) <span class="comment">#读取文件所有内容</span></span><br><span class="line"><span class="built_in">print</span>(f.encoding) <span class="comment">#打印当前使用的字符编码</span></span><br><span class="line"><span class="built_in">print</span>(f.name) <span class="comment">#打印文件名</span></span><br><span class="line"><span class="built_in">print</span>(f.flush()) <span class="comment">#刷新</span></span><br><span class="line">f.truncate() <span class="comment">#清空文件</span></span><br><span class="line">f.close() <span class="comment">#关闭文件</span></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/09/18/shell/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="baozi">
+      <meta itemprop="description" content="The road is long, the running is continue.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="baozi's page">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/09/18/shell/" class="post-title-link" itemprop="url">shell</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2025-09-18 10:02:53" itemprop="dateCreated datePublished" datetime="2025-09-18T10:02:53+08:00">2025-09-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2025-09-23 18:02:04" itemprop="dateModified" datetime="2025-09-23T18:02:04+08:00">2025-09-23</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/missing-semester/" itemprop="url" rel="index"><span itemprop="name">missing-semester</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="echo"><a href="#echo" class="headerlink" title="echo"></a>echo</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo [-neE] [ARGUMENTS]</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>当-n 选项，则取消尾随换行符</p>
+</li>
+<li><p>如果-e 选项，则将解释以下反斜杠转义字符:</p>
+<ul>
+<li><p>\ 显示反斜杠字符</p>
+</li>
+<li><p>\a 警报(BEL)</p>
+</li>
+<li><p>\b 显示退格字符</p>
+</li>
+<li><p>\c 禁止任何进一步的输出</p>
+</li>
+<li><p>\e 显示转义字符</p>
+</li>
+<li><p>\f 显示窗体提要字符</p>
+</li>
+<li><p>\n 显示新行</p>
+</li>
+<li><p>\r 显示回车</p>
+</li>
+<li><p>\t 显示水平标签</p>
+</li>
+<li><p>\v 显示垂直标签</p>
+</li>
+<li><p>这个-E 项禁用转义字符的解释。这是默认值</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="dig"><a href="#dig" class="headerlink" title="dig"></a>dig</h3><p>查询域名的DNS记录，看域名解析到哪里</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dig [@dns服务器] &lt;域名&gt; [查询类型]</span><br></pre></td></tr></table></figure>
+
+<h3 id="grep"><a href="#grep" class="headerlink" title="grep"></a>grep</h3><table>
+<thead>
+<tr>
+<th>选项</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>-i</code></td>
+<td>忽略大小写</td>
+</tr>
+<tr>
+<td><code>-n</code></td>
+<td>显示匹配行的行号</td>
+</tr>
+<tr>
+<td><code>-v</code></td>
+<td>反向匹配（显示不匹配的行）</td>
+</tr>
+<tr>
+<td><code>-r</code> &#x2F; <code>-R</code></td>
+<td>递归搜索目录下所有文件</td>
+</tr>
+<tr>
+<td><code>-l</code></td>
+<td>只显示文件名，不显示匹配内容</td>
+</tr>
+<tr>
+<td><code>-c</code></td>
+<td>只显示匹配的行数</td>
+</tr>
+<tr>
+<td><code>-o</code></td>
+<td>只输出匹配的字符串，而不是整行</td>
+</tr>
+<tr>
+<td><code>-E</code></td>
+<td>使用扩展正则（等价于 <code>egrep</code>）</td>
+</tr>
+<tr>
+<td><code>-w</code></td>
+<td>只匹配整个单词，而不是部分匹配</td>
+</tr>
+<tr>
+<td><code>--color</code></td>
+<td>高亮匹配的关键字</td>
+</tr>
+</tbody></table>
+<p>例如：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep <span class="string">&quot;error&quot;</span> /var/log/nginx/error.log</span><br></pre></td></tr></table></figure>
+
+<p>这条命令会输出所有包含error的行</p>
+<h3 id="tail"><a href="#tail" class="headerlink" title="tail"></a>tail</h3><p>显示文件的最后几行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">tail</span> /var/log/messages</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>-n &lt;行数&gt;</code></td>
+<td>显示最后 N 行（默认 10 行）</td>
+</tr>
+<tr>
+<td><code>-c &lt;字节数&gt;</code></td>
+<td>显示最后 N 个字节</td>
+</tr>
+<tr>
+<td><code>-f</code></td>
+<td>持续输出文件新增内容（实时跟踪）</td>
+</tr>
+<tr>
+<td><code>-F</code></td>
+<td>类似 <code>-f</code>，但文件被重命名或替换后会重新打开（更适合看日志）</td>
+</tr>
+<tr>
+<td><code>--pid=&lt;PID&gt;</code></td>
+<td>和 <code>-f</code> 一起用，指定进程退出后自动停止跟踪</td>
+</tr>
+<tr>
+<td><code>-q</code></td>
+<td>静默模式，多文件时不显示文件名</td>
+</tr>
+<tr>
+<td><code>-v</code></td>
+<td>强制显示文件名（多文件时更清晰）</td>
+</tr>
+</tbody></table>
+<h3 id="chown"><a href="#chown" class="headerlink" title="chown"></a>chown</h3><p>修改文件或目录的所有者和所属组</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chown</span> [选项] [新属主][:[新属组]] 文件...</span><br></pre></td></tr></table></figure>
+
+<p>例如</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chown</span> alice:developers myfile.txt</span><br></pre></td></tr></table></figure>
+
+<p>修改所有者为alice，组为developers</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chown</span> alice myfile.txt</span><br></pre></td></tr></table></figure>
+
+<p>修改所有者</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chown</span> :developers myfile.txt</span><br></pre></td></tr></table></figure>
+
+<p>所有者不变，只修改组</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2025/09/18/vim%E7%9A%84%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -241,242 +607,6 @@
 <p><code>%</code>: 在[{()}] 上面输入会自动跳转到对应的位置上</p>
 <p><code>:s/new/old/g</code>，用new代替old，g表示全局</p>
 <p><code>!command</code>: 可以在vim中输入shell命令</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2025/09/18/lua/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="baozi">
-      <meta itemprop="description" content="The road is long, the running is continue.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="baozi's page">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/09/18/lua/" class="post-title-link" itemprop="url">lua的使用</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2025-09-18 10:02:53" itemprop="dateCreated datePublished" datetime="2025-09-18T10:02:53+08:00">2025-09-18</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&quot;2&quot;</span> + <span class="number">8</span>)</span><br><span class="line"><span class="comment">-- 输出结果为10， 类型为number，lua中只有number这一种数字类型</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 字符串连接</span></span><br><span class="line">str = <span class="number">123</span> .. <span class="number">456</span></span><br><span class="line"><span class="comment">-- 输出结果为123456，类型为string</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 获取字符串长度</span></span><br><span class="line">str = <span class="string">&quot;this is a test.&quot;</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(str))</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> x = <span class="number">10</span>	<span class="comment">-- 局部变量</span></span><br><span class="line">x = <span class="number">10</span> <span class="comment">-- 全局变量</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- lua中的函数可以当作变量</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">factorial1</span><span class="params">(n)</span></span> </span><br><span class="line">  <span class="keyword">if</span> n == <span class="number">0</span> <span class="keyword">then</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">  <span class="keyword">else</span> </span><br><span class="line">    <span class="keyword">return</span> n * factorial1(n - <span class="number">1</span>)</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="built_in">print</span>(factorial1(<span class="number">10</span>))</span><br><span class="line">factorial2 = factorial1;</span><br><span class="line"><span class="built_in">print</span>(factorial2(<span class="number">10</span>))</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- if ip is true return ip, if ip is nil return &quot;unknow&quot;</span></span><br><span class="line"><span class="keyword">return</span> ip <span class="keyword">or</span> unknow</span><br></pre></td></tr></table></figure>
-
-<h3 id="lua的八种数据类型"><a href="#lua的八种数据类型" class="headerlink" title="lua的八种数据类型"></a><code>lua</code>的八种数据类型</h3><p><code>nil</code>：空类型<br><code>boolean</code><br><code>number</code>:整数和浮点数都用number表示<br><code>string</code>：可以有三种表示方式</p>
-<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">str1 = <span class="string">&#x27;this is test1&#x27;</span></span><br><span class="line">str2 = <span class="string">&quot;this ia test2&quot;</span></span><br><span class="line"><span class="comment">-- 第三种方式可以换行</span></span><br><span class="line">str3 = <span class="string">[[</span></span><br><span class="line"><span class="string">    this</span></span><br><span class="line"><span class="string">    is</span></span><br><span class="line"><span class="string">    test3</span></span><br><span class="line"><span class="string">]]</span></span><br></pre></td></tr></table></figure>
-<p><code>function</code>：function表示lua中的函数，可以接受多个参数，也可以用<code>...</code>表示可变数目的参数，function可以返回多个参数<br><code>userdata</code>：用户自定义数据<br><code>thread</code> – todo<br><code>table</code> 相当于数组，下标从1开始，里面的元素可以是各种类型的，函数也可以作为元素</p>
-<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">tb = &#123; </span><br><span class="line">        <span class="function"><span class="keyword">function</span><span class="params">()</span></span> <span class="keyword">return</span> <span class="string">&#x27;123&#x27;</span> <span class="keyword">end</span>,</span><br><span class="line">        fucntion() <span class="built_in">print</span>(<span class="string">&quot;abc) end,</span></span><br><span class="line"><span class="string">        function(a, b) return a + b end,</span></span><br><span class="line"><span class="string">    &#125;</span></span><br></pre></td></tr></table></figure>
-<p>table还可以当作哈希表</p>
-<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">tb = &#123;</span><br><span class="line">    apple = <span class="number">3</span>,</span><br><span class="line">    banana = <span class="number">4</span>,</span><br><span class="line">    [<span class="string">&quot;tt&quot;</span>] = <span class="number">5</span>,</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">print</span>(tb[<span class="string">&quot;apple&quot;</span>])</span><br><span class="line"><span class="built_in">print</span>(tb.banana)</span><br><span class="line"><span class="built_in">print</span>(tb.[<span class="string">&quot;tt&quot;</span>])</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2025/09/18/git/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="baozi">
-      <meta itemprop="description" content="The road is long, the running is continue.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="baozi's page">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/09/18/git/" class="post-title-link" itemprop="url">git使用</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2025-09-18 10:02:53" itemprop="dateCreated datePublished" datetime="2025-09-18T10:02:53+08:00">2025-09-18</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/git/" itemprop="url" rel="index"><span itemprop="name">git</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="查看当前分支"><a href="#查看当前分支" class="headerlink" title="查看当前分支"></a>查看当前分支</h3><p><code>git branch -- show-current</code></p>
-<h3 id="回退到上一个版本"><a href="#回退到上一个版本" class="headerlink" title="回退到上一个版本"></a>回退到上一个版本</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard HEAD~1</span><br></pre></td></tr></table></figure>
-
-<h3 id="删除文件"><a href="#删除文件" class="headerlink" title="删除文件"></a>删除文件</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git rm filename</span><br></pre></td></tr></table></figure>
-
-<h3 id="删除分支"><a href="#删除分支" class="headerlink" title="删除分支"></a>删除分支</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -d branch_name</span><br></pre></td></tr></table></figure>
-
-<h3 id="创建新分支"><a href="#创建新分支" class="headerlink" title="创建新分支"></a>创建新分支</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b branch_name</span><br><span class="line">git switch -c branch_name</span><br></pre></td></tr></table></figure>
-
-<h3 id="回退到clone后的版本"><a href="#回退到clone后的版本" class="headerlink" title="回退到clone后的版本"></a>回退到clone后的版本</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git restore .</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2025/09/18/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="baozi">
-      <meta itemprop="description" content="The road is long, the running is continue.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="baozi's page">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/09/18/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="post-title-link" itemprop="url">Operating System</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2025-09-18 10:02:53" itemprop="dateCreated datePublished" datetime="2025-09-18T10:02:53+08:00">2025-09-18</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Operating-System/" itemprop="url" rel="index"><span itemprop="name">Operating System</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>什么是<strong>操作系统</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">操作系统是配置在计算机硬件上的第一层软件，是对硬件系统的首次扩充</span><br></pre></td></tr></table></figure>
-
-<p><strong>操作系统</strong>的作用</p>
-<ol>
-<li>OS作为用户与计算机硬件系统之间的接口</li>
-<li>OS作为计算机系统资源的管理者</li>
-<li>OS实现了对计算机资源的抽象</li>
-</ol>
-<p><strong>单批道</strong>处理系统</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">解决人机矛盾和CPU与I/O设备速度不匹配矛盾，旨在提高系统资源的利用率和系统吞吐量</span><br></pre></td></tr></table></figure>
-
-<p><strong>单批道</strong>处理系统的缺点</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">系统中的资源得不到充分的利用。内存中仅有一道程序，每当程序在运行中发出I/O请求，CPU处于等待状态</span><br></pre></td></tr></table></figure>
-
-<p><strong>多批道</strong>处理系统</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">用户提交的作业先存放在外存上，排成一个队列，称为“后备队列”。然后由作业调度程序按一定的算法，从后备队列中选择若干个作业调入内存 ，使他们共享CPU和系统中的各种资源</span><br></pre></td></tr></table></figure>
-
 
       
     </div>
@@ -659,6 +789,97 @@
 
 <p>物理独立性</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">当数据库的存储结构改变时，由数据库管理员对模式 /内模式 映像作相应 改变，可以使模式保持不变，从而应用程序也不必改变。保证了数据与程序的物理独立性</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/09/18/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="baozi">
+      <meta itemprop="description" content="The road is long, the running is continue.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="baozi's page">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/09/18/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="post-title-link" itemprop="url">操作系统</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2025-09-18 10:02:53" itemprop="dateCreated datePublished" datetime="2025-09-18T10:02:53+08:00">2025-09-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2025-09-28 16:03:52" itemprop="dateModified" datetime="2025-09-28T16:03:52+08:00">2025-09-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Operating-System/" itemprop="url" rel="index"><span itemprop="name">Operating System</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>什么是<strong>操作系统</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">操作系统是配置在计算机硬件上的第一层软件，是对硬件系统的首次扩充</span><br></pre></td></tr></table></figure>
+
+<p><strong>操作系统</strong>的作用</p>
+<ol>
+<li>OS作为用户与计算机硬件系统之间的接口</li>
+<li>OS作为计算机系统资源的管理者</li>
+<li>OS实现了对计算机资源的抽象</li>
+</ol>
+<p><strong>单批道</strong>处理系统</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">解决人机矛盾和CPU与I/O设备速度不匹配矛盾，旨在提高系统资源的利用率和系统吞吐量</span><br></pre></td></tr></table></figure>
+
+<p><strong>单批道</strong>处理系统的缺点</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">系统中的资源得不到充分的利用。内存中仅有一道程序，每当程序在运行中发出I/O请求，CPU处于等待状态</span><br></pre></td></tr></table></figure>
+
+<p><strong>多批道</strong>处理系统</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">用户提交的作业先存放在外存上，排成一个队列，称为“后备队列”。然后由作业调度程序按一定的算法，从后备队列中选择若干个作业调入内存 ，使他们共享CPU和系统中的各种资源</span><br></pre></td></tr></table></figure>
 
 
       
@@ -975,12 +1196,6 @@
           
         <span class="site-state-item-count">14</span>
         <span class="site-state-item-name">分类</span></a>
-      </div>
-      <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">1</span>
-        <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
 </div>

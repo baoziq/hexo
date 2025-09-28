@@ -1,5 +1,5 @@
 ---
-title: lua的使用
+title: lua
 ---
 
 ```lua

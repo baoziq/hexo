@@ -1,5 +1,5 @@
 ---
-title: MySQL笔记
+title: MySQL
 author: baozi
 categories: MySQL
 ---

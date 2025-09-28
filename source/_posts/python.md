@@ -1,8 +1,7 @@
 ---
 author: baozi
-title: Python中的文件操作
+title: Python
 categories: Python
-tags: 读写文件
 ---
 
 # 打开文件

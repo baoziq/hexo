@@ -1,5 +1,5 @@
 ---
-title: git使用
+title: git
 author: baozi
 categories: git
 ---
