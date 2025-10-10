@@ -822,3 +822,32 @@ int main() {
 
 在上面这段代码中，如果不写拷贝构造和拷贝赋值的话，编译器会自动写，但是这样，a和b中的data指向的是一个地址，data会被释放两次，导致程序崩溃。
 
+### 虚函数
+
+​	对于虚函数的调用在运行时才会被解析，直到运行时才能确定使用哪个版本的虚函数，所以每个虚函数必须有定义。
+
+​	一个函数被声明成虚函数，则在所有的派生类中，它都是虚函数，但是如果派生类中的虚函数参数列表和基类中函数参数列表不相同，编译器不会报错，所以需要在派生类的虚函数中显示的写出override
+
+​	虚函数中可以有默认实参，该实参值由本次调用的静态类型决定，如果使用基类的指针调用函数，则使用基类中定义的默认实参。
+
+```c++
+class Base {
+public:
+	virtual void print(int a = 3) {
+		std::cout << "num = " << a << std::endl;
+	}
+};
+
+class Derived : public Base {
+public:
+	void print(int a = 4) override {
+		std::cout << "num = " << a << std::endl;
+	}
+};
+
+int main() {
+	Base* p = new Derived();
+	p->print();	// 输出3
+}
+```
+
