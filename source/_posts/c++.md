@@ -485,6 +485,18 @@ typedef wages base, *p;	//base是double的同义词，p是double*的同义词
 using SI = Sales_item;
 ```
 
+#### auto
+
+c++11中引入了auto，它能让编译器分析表达式所属的类型
+
+```c++
+auto item = val1 + val2;
+```
+
+根据val1与val2相加的值来推断出item的值
+
+
+
 ### explicit
 
 防止隐式类型转换
@@ -865,3 +877,225 @@ int main() {
 }
 ```
 
+### 设计模式
+
+#### LSP（里氏替换）
+
+子类能够替换所有父类出现的地方，而且代码能够正常运行
+
+```c++
+#include <iostream>
+using namespace std;
+
+class Bird {
+public:
+    virtual void fly() {
+        cout << "Bird flies" << endl;
+    }
+};
+
+class Sparrow : public Bird {
+public:
+    void fly() override {
+        cout << "Sparrow flies quickly" << endl;
+    }
+};
+
+void makeBirdFly(Bird* b) {
+    b->fly();
+}
+
+int main() {
+    Bird b;
+    Sparrow s;
+
+    makeBirdFly(&b);  // 输出 Bird 版本
+    makeBirdFly(&s);  // 输出 Sparrow 版本
+    return 0;
+}
+
+```
+
+在上述代码中，父类指针接收子类对象，代码仍然可以正常运行，这就是里氏替换
+
+下面是一个不符合里氏替换的例子
+
+```c++
+#include <iostream>
+using namespace std;
+
+class Rectangle {
+public:
+    virtual void setWidth(int w) { width = w; }
+    virtual void setHeight(int h) { height = h; }
+
+    int getWidth() const { return width; }
+    int getHeight() const { return height; }
+
+protected:
+    int width = 0;
+    int height = 0;
+};
+
+class Square : public Rectangle {
+public:
+    void setWidth(int w) override {
+        width = w;
+        height = w;   // 强制保持正方形性质
+    }
+    void setHeight(int h) override {
+        width = h;
+        height = h;   // 同上
+    }
+};
+
+void test(Rectangle* r) {
+    r->setWidth(4);
+    r->setHeight(5);
+    cout << r->getWidth() << " " << r->getHeight() << endl;
+}
+
+int main() {
+    Rectangle r;
+    Square s;
+
+    test(&r);  // 输出 4 5
+    test(&s);  // 输出 5 5  逻辑被破坏
+    return 0;
+}
+
+```
+
+在这个例子中，test函数要分别设置矩形的长和宽，但是square保持了正方形的特性，子类不能替代父类，违背里氏替换原则
+
+#### ISP（接口隔离）
+
+不要让一个类被迫依赖它不需要的功能，大接口要拆成小接口
+
+```c++
+class IWorker {
+public:
+    virtual void work() = 0;
+    virtual void eat() = 0;
+    virtual void sleep() = 0;
+    virtual ~IWorker() = default;
+};
+
+class Robot : public IWorker {
+public:
+    void work() override { cout << "Robot working" << endl; }
+    void eat() override {}    // 机器人不会吃
+    void sleep() override {}  // 机器人不会睡
+};
+
+```
+
+正确使用方法
+
+```c++
+class IWork {
+public:
+    virtual void work() = 0;
+    virtual ~IWork() = default;
+};
+
+class IEat {
+public:
+    virtual void eat() = 0;
+    virtual ~IEat() = default;
+};
+
+class ISleep {
+public:
+    virtual void sleep() = 0;
+    virtual ~ISleep() = default;
+};
+
+class Human : public IWork, public IEat, public ISleep {
+public:
+    void work() override { cout << "Human working" << endl; }
+    void eat() override { cout << "Human eating" << endl; }
+    void sleep() override { cout << "Human sleeping" << endl; }
+};
+
+class Robot : public IWork {
+public:
+    void work() override { cout << "Robot working" << endl; }
+};
+
+```
+
+#### DIP（依赖倒置）
+
+高层模块不依赖底层模块，大家一起依赖抽象；抽象不依赖细节，细节依赖抽象
+
+```c++
+class MySQL {
+public:
+    void connect() {
+        cout << "Connect to MySQL" << endl;
+    }
+};
+
+class UserService {
+public:
+    void login() {
+        db.connect();  // 直接写死数据库类型
+    }
+private:
+    MySQL db;
+};
+
+```
+
+UserService绑定mysql，之后如果要更换数据库，都需要改UserService
+
+正确方法
+
+```c++
+class IDatabase {
+public:
+    virtual void connect() = 0;
+    virtual ~IDatabase() = default;
+};
+
+class MySQL : public IDatabase {
+public:
+    void connect() override {
+        cout << "Connect to MySQL" << endl;
+    }
+};
+
+class PostgreSQL : public IDatabase {
+public:
+    void connect() override {
+        cout << "Connect to PostgreSQL" << endl;
+    }
+};
+
+class UserService {
+public:
+    UserService(IDatabase* db) : db_(db) {}
+
+    void login() {
+        db_->connect();
+    }
+private:
+    IDatabase* db_;
+};
+int main() {
+    MySQL mysql;
+    PostgreSQL pg;
+
+    UserService service1(&mysql);
+    service1.login();
+
+    UserService service2(&pg);
+    service2.login();
+    return 0;
+}
+
+
+```
+
+新加数据库直接添加就可以，不需要修改原本的代码，

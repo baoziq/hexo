@@ -113,3 +113,14 @@ chown :developers myfile.txt
 ```
 
 所有者不变，只修改组
+
+### dd
+
+`dd if=/dev/zero of=test.txt bs=1M count=10`
+
+### 参数解释：
+
+- `if=/dev/zero`：表示输入来源是一个全是 0 的虚拟设备（会输出无限个 0 字节）
+- `of=test.txt`：输出文件名为 `test.txt`
+- `bs=1M`：每次写入 1MB
+- `count=10`：一共写入 10 次（总计 10MB）

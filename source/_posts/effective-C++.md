@@ -100,3 +100,39 @@ class foo{
 
 
 
+### 4 初始化后再使用
+
+```c++
+class ABEntry {
+public:
+    ABEntry(const std::string& name, const std::string& address, const std::list<std::string> phones);
+private:
+    std::string theName;
+    std::string theAddress;
+    std::list<std::string> thePhones;
+    int numTimesConsulted;
+};
+```
+
+对于下面的构造函数
+
+```c++
+ABEtry::ABEntry(const std::string& name, const std::string* address, const std::list<std::string> phones) {
+    theName = name;
+    theAddress = address;
+    thePhones = phones;
+    numTimesConsulted = 0;
+}
+```
+
+参数是在进入构造函数前就初始化了，上面的操作是赋值，不是初始化
+
+正确的做法是使用`member initialization list`
+
+```c++
+ABEntry::ABEntry(const std::string& name, const std::string& address, const std::list<std::string> phones)
+    :theName(name), theAddress(address), thePhones(phones), numTimesConsulted(0) 
+{ }
+```
+
+赋值版本的构造函数，首先会调用default构造函数为参数设置初值，然后立刻赋予新值
