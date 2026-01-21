@@ -417,11 +417,23 @@ sizeof会统计末尾的\0
 
 strlen不统计
 
-### string 和char ch[]
+### string ，char ch[]，char*
 
 string在堆上分配内存，sizeof获取的是string类的大小
 
 char ch[]在栈上分配内存
+
+```c++
+std::string s = "abc";
+int n = 3;
+std::string str(s, n);	// 结果为空，因为这么写的话，表示从s的第n个开始截取字串
+```
+
+```c++
+char* s  = "abc";
+int n = 3;
+std::string str(s, n);	//结果为abc，从c风格的字符串中，截取前n个长度的字串
+```
 
 ### lambda函数
 
@@ -495,7 +507,27 @@ auto item = val1 + val2;
 
 根据val1与val2相加的值来推断出item的值
 
+**注意**：auto会丢掉顶层const，但会保留底层const
 
+```c++
+const int a = 20;
+auto b = a;	// b是int，而不是const int
+```
+
+但是
+
+```c++
+const int* p = &a;
+auto q = p;	// q的类型是const int* p
+```
+
+#### decltype
+
+decltype(f()) sum = x，sum的类型就是f()返回的类型
+
+decltype处理顶层const和引用的方法与auto不同，如果decltype使用的表达式是一个变量，那么它会返回该变量的类型（包括顶层const和引用）
+
+**注意**：decltype如果使用的是一个不加括号的变量，得到的结果就是这个变量的类型，如果给变量加上了括号，编译器会把它当作是表达式，此时会得到引用类型
 
 ### explicit
 
@@ -557,6 +589,8 @@ int main() {
 ```
 
 `static_cast`用法，`static_cast<要转换的类型>（变量）`
+
+可以把派生类转换为基类，但是不能把基类转换为派生类
 
 #### `dynamic_cast`
 
@@ -852,7 +886,17 @@ int main() {
 
 ​	对于虚函数的调用在运行时才会被解析，直到运行时才能确定使用哪个版本的虚函数，所以每个虚函数必须有定义。
 
-​	一个函数被声明成虚函数，则在所有的派生类中，它都是虚函数，但是如果派生类中的虚函数参数列表和基类中函数参数列表不相同，编译器不会报错，所以需要在派生类的虚函数中显示的写出override
+​	一个函数被声明成虚函数，则在所有的派生类中，它都是虚函数，但是如果派生类中的虚函数参数列表和基类中函数参数列表不相同，编译器不会报错，所以需要在派生类的虚函数中显示的写出override。override还可以与final组合，作用是被修饰的函数只能覆写一层
+
+```c++
+class Derived : public Base {
+public:
+    void func(int x) override final; // ✅ 可以重写，但不允许更下一级重写
+};
+
+```
+
+如果有一个类继承了Derived，那么它不能再覆写func
 
 ​	虚函数中可以有默认实参，该实参值由本次调用的静态类型决定，如果使用基类的指针调用函数，则使用基类中定义的默认实参。
 
